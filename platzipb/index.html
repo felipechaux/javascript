@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tu peso en otros planetas </title>
+	<style type="text/css">
+     p
+     {
+      font-family:Helvetica;
+      color:white;
+     }
+     body{
+      background-color: blue;
+
+     }
+	</style>
+</head>
+<body>
+<p>parrafo</p>
+
+<script type="text/javascript">
+var g_tierra=9.8;
+var peso_usuario=parseInt(prompt("Digita tu peso"));
+var planeta=prompt("Selecciona un planeta \n 1.Marte \n 2.Jupiter \n 3.Saturno ");
+var g_marte=3.7;
+var g_jupiter=24.8;
+var g_saturno=10.44;
+var string_planeta;
+var peso_final;
+
+   if(planeta==1)
+   { 
+   	string_planeta="Marte";
+    peso_final=peso_usuario*g_marte/g_tierra;
+   }
+   else if(planeta==2)
+   {
+   	string_planeta="Jupiter";
+    peso_final=peso_usuario*g_jupiter/g_tierra;
+   }
+   else if(planeta==3)
+   {
+   	string_planeta="Saturno";
+    peso_final=peso_usuario*g_saturno/g_tierra;
+   }
+   else{
+    string_planeta="KRIPTOOON";
+   	alert("Opcion invalida");
+   	peso_final=0;
+   }
+peso_final=parseInt(peso_final);
+document.write("<p>Tu peso en  "+string_planeta+" es de : <strong>"+peso_final+" Kilos</strong></p>");
+
+
+
+</script>
+
+</body>
+</html>
