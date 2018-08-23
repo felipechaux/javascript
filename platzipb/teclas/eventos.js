@@ -8,7 +8,6 @@ var teclas = {
 
 console.log(teclas);
 document.addEventListener("keyup",dibujarTeclado);
-
 var cuadrito=document.getElementById("dibujo");
 var papel=cuadrito.getContext("2d");
 var x=150;
@@ -25,7 +24,7 @@ function dibujarLinea(color,xinicial,yinicial,xfinal,yfinal,lienso)
 	//ancho de linea-grosor
 	lienso.lineWidth=3;
 	//posiciones
-	lienso.moveTo(xinicial,xfinal);
+	lienso.moveTo(xinicial,yinicial);
 	lienso.lineTo(xfinal,yfinal);
 	lienso.stroke();
 	//cerrar traso
@@ -50,14 +49,19 @@ function dibujarTeclado(evento)
 	    break;
 	    case teclas.DOWN:
 	    console.log("vamo pa abajo");
+	    dibujarLinea(color,x,y,x,y+movimiento,papel);
+	    y+=movimiento;
 	    break;
 	    case teclas.LEFT:
 	    console.log("vamo pa izquierda");
+	    dibujarLinea(color,x,y,x-movimiento,y,papel);
+        x-=movimiento;
+
 	    break;
 	    case teclas.RIGHT:
 	    console.log("vamo pa derecha");
 	    dibujarLinea(color,x,y,x+movimiento,y,papel);
-	    x=x+movimiento;
+        x+=movimiento;
 	    break;
 	    default:
 	    console.log("otra tecla");
