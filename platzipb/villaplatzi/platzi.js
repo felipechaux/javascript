@@ -6,7 +6,7 @@ var teclas = {
   RIGHT: 39
 };
 
-document.addEventListener("keyup",teclado);
+document.addEventListener("keydown",teclado);
 
 /*
 var z;
@@ -60,66 +60,84 @@ pollo.imagen.src=pollo.url;
 pollo.imagen.addEventListener("load",cargarPollos);
 
 
-/*
-var cerdo=new Image();
-cerdo.src="cerdo.png";
-cerdo.addEventListener("load",cargarCerdos);
-
-var pollo=new Image();
-pollo.src="pollo.png";
-pollo.addEventListener("load",cargarPollos);
-*/
-
 var xx=0;
 var yy=0;
+
+var vx=[];
+var vy=[];
+
+var px=[];
+var py=[];
+
+var cx=[];
+var cy=[];
 
 
 function teclado(evento)
 {
     var color="blue"; 
-    var movimiento=5;
-    
+    var movimiento=60;
 
   switch(evento.keyCode)
   {
 
       case teclas.UP:
-     // y-=movimiento;
+      refrescar();
       console.log("vamo pa arriba");
       papel.drawImage(cerdo.imagen,xx,yy-movimiento);
       yy-=movimiento;
 
       break;
       case teclas.DOWN:
+      refrescar();
       console.log("vamo pa abajo");
       papel.drawImage(cerdo.imagen,xx,yy+movimiento);
       yy+=movimiento;
       break;
       case teclas.LEFT:
-      papel.fillRect(0, 0, 300, 150);
-      
+      refrescar();
       console.log("vamo pa izquierda");
       papel.drawImage(cerdo.imagen,xx-movimiento,yy);
       xx-=movimiento;
       break;
       case teclas.RIGHT:
-      papel.fillRect(0, 0, 300, 150);
 
+      refrescar();
       console.log("vamo pa derecha");
       papel.drawImage(cerdo.imagen,xx+movimiento,yy);
       xx+=movimiento;
 
-       // x+=movimiento;
       break;
-      default:
-      console.log("otra tecla");
-      break;
+    
   }
 
-//console.log("tecla oprimida");
-console.log(evento.keyCode);
 }
 
+function refrescar(){
+    //redibujar animales en posiciones guardadas
+
+    papel.drawImage(fondo.imagen,0,0);
+
+    console.log("posiciones ");
+
+    console.log(cantidad);
+
+     for (var i = 0; i < cantidad; i++) {
+         
+           console.log("x");
+           console.log(vx[i]);
+
+           console.log("y");
+           console.log(vy[i]);
+
+           papel.drawImage(vaca.imagen,vx[i],vy[i]);
+           papel.drawImage(pollo.imagen,px[i],py[i]);
+           papel.drawImage(cerdo.imagen,cx[i],cy[i]);
+
+      }
+    
+  
+}
 function cargarFondo(){
 
  fondo.cargaOK=true;
@@ -143,7 +161,10 @@ function cargarCerdos(){
   dibujar();
 }
 
+
 function dibujar(){
+
+    console.log(cantidad);
 
 
 	if(fondo.cargaOK){
@@ -152,9 +173,6 @@ function dibujar(){
 
 	}
    if(vaca.cargaOK){
-
-
-       console.log(cantidad);
 
    	   for (var i = 0; i < cantidad; i++) {
    	   	
@@ -165,7 +183,12 @@ function dibujar(){
          x*=60;
          y*=60;
 
-    	papel.drawImage(vaca.imagen,x,y);
+         //console.log(i);
+         //console.log("original x "+x);
+         //console.log("original y "+y);
+          vx[i]=x;
+          vy[i]=y;
+       	papel.drawImage(vaca.imagen,x,y);
 
 
    	   }
@@ -184,6 +207,13 @@ function dibujar(){
          x*=60;
          y*=60;
 
+         console.log(i);
+         console.log("original x pollo "+x);
+         console.log("original y pollo "+y);
+
+        px[i]=x;
+        py[i]=y;
+
        papel.drawImage(pollo.imagen,x,y);
 
    	   }
@@ -192,7 +222,7 @@ function dibujar(){
 
   if(cerdo.cargaOK){
 
- papel.drawImage(cerdo.imagen,0,0);
+  papel.drawImage(cerdo.imagen,0,0);
 
   for (var i = 0; i < cantidad; i++) {
         
@@ -202,6 +232,10 @@ function dibujar(){
     
          x*=60;
          y*=60;
+
+         cx[i]=x;
+         cy[i]=y;
+
 
        papel.drawImage(cerdo.imagen,x,y);
 
