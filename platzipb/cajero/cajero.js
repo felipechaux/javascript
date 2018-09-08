@@ -15,14 +15,12 @@ class Billete{
 }
 
 function entregarDinero(){
-
+ 
 	
    var d=document.getElementById("dinero");
     
    dinero=parseInt(d.value); 
 
-   alert(dinero);
-	
 
 	for (var bi of caja) 
 	{
@@ -49,11 +47,32 @@ function entregarDinero(){
 
 	}
 
-   if(dinero>0){
+   if(dinero>0)
+     {
+
        console.log("No tengo dinero");
+       resultado.innerHTML="No tengo dinero";
+     }
+     else
+     {
+
+	       for (var e of entregado) 
+	       {
+
+	       //	document.write(e.cantidad+" billetes de $"+e.valor+" <br/>");
+
+	         if(e.cantidad>0)
+	         {
+	           resultado.innerHTML+=e.cantidad+" billetes de $"+e.valor+" <br/>";
+	           console.log(entregado);
+	         }
+
+	       }
+	  
+     
      }
 
-	console.log(entregado);
+
 }
 
 var caja=[];
@@ -70,7 +89,7 @@ var dinero=0;
 var div=0;
 var papeles=0;
 
-
+var resultado=document.getElementById("resultado");
 var b=document.getElementById("vueltas");
 
 b.addEventListener("click",entregarDinero);
